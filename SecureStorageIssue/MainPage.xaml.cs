@@ -12,11 +12,11 @@ public partial class MainPage : ContentPage
 	private async void OnCounterClicked(object sender, EventArgs e)
 	{
 		var key = "TestKey";
-        // After restarting the app and pressing the button again we expect readOldKey to be filled
-		// because we called SetAsync after the RemoveAll(), readOldKey will be null though.
+        // After restarting the app and pressing the button again we expect readOldKey to be filled because we called SetAsync after the RemoveAll(), readOldKey will be null though.
         var readOldKey = await SecureStorage.Default.GetAsync(key); 
 		SecureStorage.RemoveAll();
 		await SecureStorage.Default.SetAsync(key, "Testvalue");
+  		// readNewKey will properly have the value, but it will be gone after restarting the app.
 		var readNewKey = await SecureStorage.Default.GetAsync(key);
 	}
 }
